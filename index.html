@@ -5,9 +5,8 @@
 <body style='margin : 0px; overflow: hidden;'>
   <a-scene embedded arjs='sourceType: webcam;'>
 
-    <!-- handle marker with hiro preset -->
-    <a-marker preset='hiro'>
-      <a-box position='0 0.5 0' material='color: green;'></a-box>
+    <a-marker type='pattern' url='./pattern-marker.patt'>
+      <a-box position='0 0.5 0' material='color: red;'></a-box>
     </a-marker>
 
     <!-- add a simple camera -->
