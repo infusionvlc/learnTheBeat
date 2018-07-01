@@ -1,19 +1,39 @@
 <head>
     <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
-    <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>        
+    <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
+    <script src="./vendor/STLLoader.js"></script>
 </head>
 <body style='margin : 0px; overflow: hidden;'>
   <a-scene embedded arjs='sourceType: webcam;'>
-
-    <a-marker type='pattern' url='./pattern-marker.patt'>
-      <a-box position='0 0.5 0' material='color: red;'></a-box>
+    <a-marker type='pattern' url='./patterns/pattern-marker.patt'>
+      <a-entity class="note" position='0 0.5 0' material="color: red">
+          <a-animation attribute="rotation"
+               easing="linear"
+               dur="10000"
+               fill="forwards"
+               to="0 360 0"
+               repeat="indefinite"></a-animation>
+      </a-entity>
     </a-marker>
 
-    <a-marker type='pattern' url='./pattern-marker-2.patt'>
+    <a-marker type='pattern' url='./patterns/pattern-marker-2.patt'>
       <a-box position='0 0.5 0' material='color: blue;'></a-box>
     </a-marker>
 
     <!-- add a simple camera -->
     <a-entity camera></a-entity>
+
+    <script>
+        var loader = new THREE.STLLoader();
+         var group = new THREE.Object3D();
+         loader.load("./models/1la_chang.stl", function (geometry) {
+             var mat = new THREE.MeshStandardMaterial({color: 0x7777ff});
+             group = new THREE.Mesh(geometry, mat);
+             group.position.set(0, 0, 0);
+             console.log("Hola");
+             document.getElementsByClassName('note')[0].setObject3D("mesh", group);
+         });
+         
+     </script>
   </a-scene>
 </body>
