@@ -31,6 +31,8 @@
       init: function () {
         var el = this.el;
         
+        var onScreen = false;
+
         var delay = 0; // play one note every quarter second
         var do3 = 60;
         var re3 = 62;
@@ -77,36 +79,19 @@
         }
       });
       
-      console.log(el.parentElement);
       el.parentElement.addEventListener('markerFound', function () { 
-        //alert("HOLA");
-        // play the note
-        MIDI.setVolume(0, 127);
-        MIDI.noteOn(0, do4, velocity, 0);
-        MIDI.noteOff(0, do4, 1);
-        /*MIDI.noteOn(0, do4, velocity, 1);
-        MIDI.noteOff(0, do4, 2);
-        MIDI.chordOn(0, [do3, sol3], velocity, 0);
-        MIDI.chordOff(0, [do3, sol3], 2);
-        MIDI.noteOn(0, sol4, velocity, 2);
-        MIDI.noteOff(0, sol4, 3);
-        MIDI.noteOn(0, sol4, velocity, 3);
-        MIDI.noteOff(0, sol4, 4);
-        MIDI.chordOn(0, [mi3, sol3], velocity, 2);
-        MIDI.chordOff(0, [mi3, sol3], 4);
-  
-        MIDI.noteOn(0, la4, velocity, 4);
-        MIDI.noteOff(0, la4, 5);
-        MIDI.noteOn(0, la4, velocity, 5);
-        MIDI.noteOff(0, la4, 6);
-        MIDI.chordOn(0, [fa3, sol3], velocity, 4);
-        MIDI.chordOff(0, [fa3, sol3], 6);
-        MIDI.noteOn(0, sol4, velocity, 6);
-        MIDI.noteOff(0, sol4, 8);
-        MIDI.chordOn(0, [mi3, sol3], velocity, 6);
-        MIDI.chordOff(0, [mi3, sol3], 8);*/
+        if(onScreen == false){
+          onScreen = true;
+          MIDI.setVolume(0, 127);
+          MIDI.noteOn(0, do4, velocity, 0);
+          MIDI.noteOff(0, do4, 1);
+        
+        }
       }); 
-      console.log(el.parentElement);
+
+      el.parentElement.addEventListener('markerLost', function () { 
+        onScreen = false;
+      }); 
 
       
       },
