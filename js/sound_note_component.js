@@ -12,8 +12,23 @@ var notes = {
     do8  : 120, re8  : 122, mi8  : 124, fa8  : 125, sol8  : 127
 }
 
+var notes_colors = {
+  do :  "#FF0000",
+  re :  "#FF7F00",
+  mi :  "#FFFF00",
+  fa :  "#00FF00",
+  sol : "#0000FF",
+  la :  "#4B0082",
+  si :  "#9400D3"
+}
+
 var delay = 0; // play one note every quarter second
 var velocity = 127;
+
+function shadeColor2(color, percent) {
+  var f=parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
+  return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
+}
 
 AFRAME.registerComponent('sound_note', {
     schema: {
@@ -30,7 +45,12 @@ AFRAME.registerComponent('sound_note', {
         var instrument_number = MIDI.GM.byName[instrument_name].number;
 
         var note_number = notes[this.data.note];
-        
+        var color = notes_colors[this.data.note.slice(0, -1)];
+        var opacity = parseInt(this.data.note.slice(-1))/10.0;
+
+        el.setAttribute("stl-model","src: #note");
+        el.setAttribute("material","color: " + shadeColor2(color, opacity));
+
         el.parentElement.addEventListener('markerFound', function () {
           if(onScreen == false){
             onScreen = true;
@@ -38,7 +58,6 @@ AFRAME.registerComponent('sound_note', {
             MIDI.setVolume(0, 127);
             MIDI.noteOn(0, note_number, velocity, 0);
             MIDI.noteOff(0, note_number, 1);
-
           }
         });
 
