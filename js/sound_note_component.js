@@ -137,8 +137,11 @@ AFRAME.registerComponent('sound_note', {
         el.setAttribute("stl-model","src: #note");
         el.setAttribute("material","color: " + shadeColor2(color, opacity));
 
+        var system = document.querySelector('a-scene').systems['sound_note'];
+
         el.parentElement.addEventListener('markerFound', function () {
           if(onScreen == false){
+            system.add_active_note(note_number);
             onScreen = true;
             MIDI.programChange(0, instrument_number);
             MIDI.setVolume(0, 127);
@@ -149,6 +152,7 @@ AFRAME.registerComponent('sound_note', {
 
         el.parentElement.addEventListener('markerLost', function () {
             onScreen = false;
+            system.remove_active_note(note_number);
         });
 
 

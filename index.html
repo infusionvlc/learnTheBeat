@@ -22,6 +22,7 @@
 	<script src="./MIDI/js/util/dom_request_xhr.js" type="text/javascript"></script>
 	<script src="./MIDI/js/util/dom_request_script.js" type="text/javascript"></script>
 
+  <script src="./js/sound_note_system.js" type="text/javascript"></script>
   <script src="./js/sound_note_component.js" type="text/javascript"></script>
 </head>
 <body style='margin : 0px; overflow: hidden;'>
@@ -40,13 +41,24 @@
 
   </script>
 
-  <a-scene embedded arjs='sourceType: webcam;'>
+  <a-scene embedded arjs='sourceType: webcam;' sound_note>
     <a-assets>
       <a-asset-item response-type="arraybuffer" id="note" src="./models/1la_chang.stl"></a-asset-item>
     </a-assets>
 
-    <a-marker type='pattern' url='./patterns/pattern-marker.patt' emitevents='true'>
-      <a-entity position='0 0.5 0' material="color: red" sound_note="instrument: accordion; note: re1">
+    <a-marker type='pattern' url='./patterns/patt/do.patt' emitevents='true'>
+      <a-entity position='0 0.5 0' material="color: red" sound_note="instrument: accordion; note: do3">
+          <a-animation attribute="rotation"
+               easing="linear"
+               dur="10000"
+               fill="forwards"
+               to="0 360 0"
+               repeat="indefinite"></a-animation>
+      </a-entity>
+    </a-marker>
+
+    <a-marker type='pattern' url='./patterns/patt/sol.patt' emitevents='true'>
+      <a-entity position='0 0.5 0' material="color: red" sound_note="instrument: accordion; note: sol3">
           <a-animation attribute="rotation"
                easing="linear"
                dur="10000"
