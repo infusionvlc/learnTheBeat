@@ -12,6 +12,92 @@ var notes = {
     do8  : 120, re8  : 122, mi8  : 124, fa8  : 125, sol8  : 127
 }
 
+const chord_type = {
+  MINOR:     "minor",
+  MINOR_DIS: "minor_dis",
+  MINOR_AUM: "minor_aum",
+  MAJOR:     "major",
+  MAJOR_DIS: "major_dis",
+  MAJOR_AUM: "major_aum"
+}
+
+function calculateChord(first_note, second_note, third_note){
+  var semitone_diff_1 = second_note - first_note;
+  var semitone_diff_2 = third_note - first_note;
+
+  var chord_type_1;
+
+  if(semitone_diff_1 == 3){
+    chord_type_1 = "minor";
+  }else if(semitone_diff_1 == 4){
+    chord_type_1 = "major";
+  }
+
+  var chord_type_2;
+
+  if(semitone_diff_2 == 7){
+    chord_type_2 = "";
+  }else if(semitone_diff_2 == 6){
+    chord_type_2 = "_dis";  
+  }else if(semitone_diff_2 == 8){
+    chord_type_2 = "_aum";
+  }
+
+  if(typeof chord_type_1 == 'undefined' || 
+     typeof chord_type_2 == 'undefined'){
+       alert("UPSIE");
+  }else{
+
+    var chord = {
+      base_note  : first_note,
+      chord_type : chord_type_1 + chord_type_2,
+      name       : chordToString(first_note, chord_type_1, chord_type_2)
+    };
+
+    return chord;
+  }
+}
+
+function noteToString(note_number){
+  var module = note_number%12;
+
+  switch(module){
+    case 0:  return "Do";
+    case 2:  return "Re";
+    case 4:  return "Mi";
+    case 5:  return "Fa";
+    case 7:  return "Sol";
+    case 9:  return "La";
+    case 11: return "Si";
+  }
+}
+
+function chordTypeToString(chord_type_1, chord_type_2){
+  var chord_type;
+  if(chord_type_1 == "minor"){
+    chord_type = "m";
+  }else{
+    chord_type = "M";
+  }
+
+  if(chord_type_2 == "_dis"){
+    chord_type += " dis";
+  }else if(chord_type_2 == "_aum"){
+    chord_type += " aum";
+  }
+
+  return chord_type;
+}
+
+function chordToString(note_number, chord_type_1, chord_type_2){
+  var chord_str;
+  chord_str = noteToString(note_number);
+  chord_str += chordTypeToString(chord_type_1, chord_type_2);
+
+  return chord_str;
+}
+
+
 var notes_colors = {
   do :  "#FF0000",
   re :  "#FF7F00",
