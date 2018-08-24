@@ -130,10 +130,7 @@ AFRAME.registerComponent('sound_note', {
           if(onScreen == false){
             system.add_active_note(note_number);
             onScreen = true;
-            MIDI.programChange(0, instrument_number);
-            MIDI.setVolume(0, 127);
-            MIDI.noteOn(0, note_number, velocity, 0);
-            MIDI.noteOff(0, note_number, 1);
+            system.play_sound(note_number);
           }
         });
 
