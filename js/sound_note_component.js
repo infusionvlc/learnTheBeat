@@ -13,10 +13,10 @@ var notes = {
 }
 
 const chord_type = {
-  MINOR: "M",
-  MAJ:   "m",
-  DIS:   " dis",
-  AUM:   " aum"
+  MIN: "m",
+  MAJ: "M",
+  DIS: " dis",
+  AUM: " aum"
 }
 
 function calculateBasicChord(first_note, second_note, third_note){
@@ -48,9 +48,9 @@ function calculateBasicChord(first_note, second_note, third_note){
   }
 
   var chord = {
-    notes  : [first_note, second_note, third_note],
-    chord_type : chord_type,
-    name       : chordToString(first_note, chord_type)
+    notes : [first_note, second_note, third_note],
+    type  : chord_type,
+    name  : chordToString(first_note, chord_type)
   };
   console.log(chord);
   return chord;
