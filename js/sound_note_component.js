@@ -37,9 +37,9 @@ function calculateBasicChord(first_note, second_note, third_note){
   }
 
   if(semitone_diff_2 == 7){
-    
+
   }else if(semitone_diff_2 == 6 && chord_type == "m"){
-    chord_type = " dis";  
+    chord_type = " dis";
   }else if(semitone_diff_2 == 8 && chord_type == "M"){
     chord_type = " aum";
   }else{
@@ -135,8 +135,10 @@ AFRAME.registerComponent('sound_note', {
         });
 
         el.parentElement.addEventListener('markerLost', function () {
-            onScreen = false;
-            system.remove_active_note(note_number);
+            if(onScreen == true) {
+              onScreen = false;
+              system.remove_active_note(note_number);
+            }
         });
 
 

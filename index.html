@@ -40,6 +40,7 @@
     };
 
   </script>
+  <div id="hook" style="position: fixed; top: 20px; font-size: 4em; color: white;"></div>
 
   <a-scene embedded arjs='sourceType: webcam;' sound_note>
     <a-assets>
@@ -57,8 +58,8 @@
       </a-entity>
     </a-marker>
 
-    <a-marker type='pattern' url='./patterns/patt/solb.patt' emitevents='true'>
-      <a-entity position='0 0.5 0' material="color: red" sound_note="instrument: acoustic_grand_piano; note: solb3">
+    <a-marker type='pattern' url='./patterns/patt/la.patt' emitevents='true'>
+      <a-entity position='0 0.5 0' material="color: red" sound_note="instrument: acoustic_grand_piano; note: la3">
           <a-animation attribute="rotation"
                easing="linear"
                dur="10000"
@@ -68,8 +69,8 @@
       </a-entity>
     </a-marker>
 
-    <a-marker type='pattern' url='./patterns/patt/la.patt' emitevents='true'>
-      <a-entity position='0 0.5 0' material="color: red" sound_note="instrument: acoustic_grand_piano; note: la3">
+    <a-marker type='pattern' url='./patterns/patt/solb.patt' emitevents='true'>
+      <a-entity position='0 0.5 0' material="color: red" sound_note="instrument: acoustic_grand_piano; note: solb3">
           <a-animation attribute="rotation"
                easing="linear"
                dur="10000"
