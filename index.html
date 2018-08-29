@@ -47,44 +47,30 @@
       <a-asset-item response-type="arraybuffer" id="note" src="./models/1la_chang.stl"></a-asset-item>
     </a-assets>
 
-    <a-marker type='pattern' url='./patterns/patt/re.patt' emitevents='true'>
-      <a-entity position='0 0.5 0' material="color: red" sound_note="instrument: acoustic_grand_piano; note: re3">
-          <a-animation attribute="rotation"
-               easing="linear"
-               dur="10000"
-               fill="forwards"
-               to="0 360 0"
-               repeat="indefinite"></a-animation>
-      </a-entity>
-    </a-marker>
-
-    <a-marker type='pattern' url='./patterns/patt/la.patt' emitevents='true'>
-      <a-entity position='0 0.5 0' material="color: red" sound_note="instrument: acoustic_grand_piano; note: la3">
-          <a-animation attribute="rotation"
-               easing="linear"
-               dur="10000"
-               fill="forwards"
-               to="0 360 0"
-               repeat="indefinite"></a-animation>
-      </a-entity>
-    </a-marker>
-
-    <a-marker type='pattern' url='./patterns/patt/solb.patt' emitevents='true'>
-      <a-entity position='0 0.5 0' material="color: red" sound_note="instrument: acoustic_grand_piano; note: solb3">
-          <a-animation attribute="rotation"
-               easing="linear"
-               dur="10000"
-               fill="forwards"
-               to="0 360 0"
-               repeat="indefinite"></a-animation>
-      </a-entity>
-    </a-marker>
-
-    <a-marker type='pattern' url='./patterns/pattern-marker-2.patt'>
-      <a-box position='0 0.5 0' material='color: blue;' sound_note></a-box>
-    </a-marker>
-
     <!-- add a simple camera -->
     <a-entity camera></a-entity>
   </a-scene>
 </body>
+<script>
+  //var notes_list = ['dob3', 'do3', 'reb3', 'reb3', 're3', 'mib3', 'mib3', 'mi3', 'fa3', 'solb3', 'solb3','sol3', 'lab3', 'lab3', 'la3', 'sib3', 'sib3', 'si3'];
+  //var notes_marks = ['dob', 'do', 'do\#', 'reb', 're', 're\#', 'mib', 'mi', 'fa', 'fa\#', 'solb', 'sol', 'sol\#', 'lab', 'la', 'la\#', 'sib', 'si'];
+  var notes_list = ['dob3', 'do3', 'reb3', 're3', 'mib3', 'mi3', 'fa3', 'solb3','sol3', 'lab3', 'la3', 'sib3', 'si3'];
+  var notes_marks = ['dob', 'do', 'reb', 're', 'mib', 'mi', 'fa', 'solb', 'sol', 'lab', 'la', 'sib', 'si'];
+  var sceneEl = document.querySelector('a-scene');
+  for (var i = 0; i < notes_marks.length; i++){
+    var entityEl = document.createElement('a-marker');
+    entityEl.setAttribute('type', 'pattern');
+    entityEl.setAttribute('url', './patterns/patt/' + notes_marks[i] + '.patt');
+    entityEl.setAttribute('emitevents', 'true');
+
+    var subEntityEl = document.createElement('a-entity');
+    subEntityEl.setAttribute('position', '0 0.5 0');
+    subEntityEl.setAttribute('material', 'color: red');
+    subEntityEl.setAttribute('sound_note', 'instrument: acoustic_grand_piano; note: ' + notes_list[i] + '');
+    subEntityEl.innerHTML = '<a-animation attribute="rotation" easing="linear" dur="10000" fill="forwards" to="0 360 0" repeat="indefinite"></a-animation>';
+
+    //entityEl.appendChild(subEntityEl);
+    entityEl.innerHTML = subEntityEl.outerHTML;
+    sceneEl.appendChild(entityEl);
+  }
+</script>
