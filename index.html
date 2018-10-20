@@ -50,6 +50,18 @@
     <!-- add a simple camera -->
     <a-entity camera></a-entity>
   </a-scene>
+  
+  <div style="margin: 0em; left: 2em; top: 2em; position: fixed;">
+
+      <button id=gamePlayButton class=button onclick="startGame()"> PLAY </button>
+      <button id=gameStopButton class=button onclick="stopGame()" disabled> STOP </button>
+      <div>
+          <span id="failsScore" style="color: red"></span>
+          <span id="corretsScore" style="color: green"></span>
+      </div>
+      
+  </div>
+
 </body>
 <script>
   //var notes_list = ['dob3', 'do3', 'reb3', 'reb3', 're3', 'mib3', 'mib3', 'mi3', 'fa3', 'solb3', 'solb3','sol3', 'lab3', 'lab3', 'la3', 'sib3', 'sib3', 'si3'];
@@ -57,20 +69,51 @@
   var notes_list = ['dob3', 'do3', 'reb3', 're3', 'mib3', 'mi3', 'fa3', 'solb3','sol3', 'lab3', 'la3', 'sib3', 'si3'];
   var notes_marks = ['dob', 'do', 'reb', 're', 'mib', 'mi', 'fa', 'solb', 'sol', 'lab', 'la', 'sib', 'si'];
   var sceneEl = document.querySelector('a-scene');
-  for (var i = 0; i < notes_marks.length; i++){
-    var entityEl = document.createElement('a-marker');
+  for (let i = 0; i < notes_marks.length; i++){
+    console.log(i)
+    let entityEl = document.createElement('a-marker');
     entityEl.setAttribute('type', 'pattern');
     entityEl.setAttribute('url', './patterns/patt/' + notes_marks[i] + '.patt');
     entityEl.setAttribute('emitevents', 'true');
 
-    var subEntityEl = document.createElement('a-entity');
+    let subEntityEl = document.createElement('a-entity');
     subEntityEl.setAttribute('position', '0 0.5 0');
     subEntityEl.setAttribute('material', 'color: red');
+    console.log(notes_list[i]);
     subEntityEl.setAttribute('sound_note', 'instrument: acoustic_grand_piano; note: ' + notes_list[i] + '');
     subEntityEl.innerHTML = '<a-animation attribute="rotation" easing="linear" dur="10000" fill="forwards" to="0 360 0" repeat="indefinite"></a-animation>';
 
-    //entityEl.appendChild(subEntityEl);
-    entityEl.innerHTML = subEntityEl.outerHTML;
+    entityEl.appendChild(subEntityEl);
+    //entityEl.innerHTML = subEntityEl.outerHTML;
     sceneEl.appendChild(entityEl);
+
+    
   }
+
+  function startGame(){
+    document.getElementById("gamePlayButton").disabled = true; 
+    document.getElementById("gameStopButton").disabled = false; 
+    var system = document.querySelector('a-scene').systems['sound_note'];
+    var note_name = notes_list[Math.floor(Math.random()*notes_list.length)]
+    current_note = 67;//notes[note_name]; 
+    system.play_sound(current_note);
+
+    fails = 0;
+    corrects = 0;
+  }
+
+  function stopGame(){
+    document.getElementById("gameStopButton").disabled = true; 
+    document.getElementById("gamePlayButton").disabled = false;
+    
+    fails = 0;
+    corrects = 0;
+    document.getElementById('failsScore').innerHTML= fails;
+    document.getElementById('corretsScore').innerHTML= corrects;
+    
+    current_note = -1;
+  }
+
+  document.getElementById('failsScore').innerHTML= fails;
+  document.getElementById('corretsScore').innerHTML= corrects;
 </script>

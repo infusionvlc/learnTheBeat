@@ -1,3 +1,8 @@
+// Used in game
+var current_note = -1;
+var fails = 0;
+var corrects = 0;
+
 var notes = {
     do_2 : 0,  reb_2 : 1,  re_2 : 2 ,  mib_2 : 3,  mi_2 : 4,   fa_2 : 5,  solb_2 : 6,  sol_2 : 7,  lab_2 : 8,  la_2 : 9,  sib_2 : 10,  si_2 : 11,
     do_1 : 12, reb_1 : 13,  re_1 : 14,  mib_1 : 15, mi_1 : 16,  fa_1 : 17,  solb_1 : 18,  sol_1 : 19,  lab_1 : 20,  la_1 : 21,  sib_1 : 22,  si_1 : 23,
@@ -80,6 +85,7 @@ function chordToString(note_number, chord_type){
 
 
 var notes_colors = {
+  dob : "#FF0000",
   do :  "#FF0000",
   reb : "#FF0F00",
   re :  "#FF7F00",
@@ -131,6 +137,20 @@ AFRAME.registerComponent('sound_note', {
             system.add_active_note(note_number);
             onScreen = true;
             system.play_sound(note_number);
+            console.log("CORRECTA ", current_note);
+            console.log("ACTUAL   ", note_number);
+            if(current_note != -1){
+              if(current_note == note_number){
+                corrects++;
+                console.log("Aciertos: ", corrects);
+              }else{
+                fails++;
+                console.log("Fallos: ",fails);
+              }
+              document.getElementById('failsScore').innerHTML= fails;
+              document.getElementById('corretsScore').innerHTML= corrects;
+              console.log("ESTAMOS EN JUEGO");
+            }
           }
         });
 
