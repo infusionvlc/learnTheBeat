@@ -115,6 +115,8 @@
 
 </body>
 <script>
+      var Ongame=false;
+
   //var notes_list = ['dob3', 'do3', 'reb3', 'reb3', 're3', 'mib3', 'mib3', 'mi3', 'fa3', 'solb3', 'solb3','sol3', 'lab3', 'lab3', 'la3', 'sib3', 'sib3', 'si3'];
   //var notes_marks = ['dob', 'do', 'do\#', 'reb', 're', 're\#', 'mib', 'mi', 'fa', 'fa\#', 'solb', 'sol', 'sol\#', 'lab', 'la', 'la\#', 'sib', 'si'];
   var notes_list = ['dob3', 'do3', 'reb3', 're3', 'mib3', 'mi3', 'fa3', 'solb3','sol3', 'lab3', 'la3', 'sib3', 'si3'];
@@ -142,6 +144,7 @@
   }
 
   function startGame(){
+    Ongame=true;
     document.getElementById("gamePlayButton").disabled = true; 
     document.getElementById("gameStopButton").disabled = false; 
     var system = document.querySelector('a-scene').systems['sound_note'];
@@ -154,10 +157,11 @@ var note_name = notes_list[Math.floor(Math.random()*notes_list.length)]
     system.play_sound(current_note);
     console.log(""+current_note);
     fails = 0;
-    corrects = 0;
+    //corrects = 0;
   }
 
   function stopGame(){
+    Ongame=false;
     document.getElementById("gameStopButton").disabled = true; 
     document.getElementById("gamePlayButton").disabled = false;
     

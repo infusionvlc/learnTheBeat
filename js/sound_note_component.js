@@ -133,6 +133,7 @@ AFRAME.registerComponent('sound_note', {
         var system = document.querySelector('a-scene').systems['sound_note'];
 
         el.parentElement.addEventListener('markerFound', function () {
+          if(!Ongame){console.log('No estas jugando');}
           if(onScreen == false){
             system.add_active_note(note_number);
             onScreen = true;
