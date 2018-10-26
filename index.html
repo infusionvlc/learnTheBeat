@@ -1,6 +1,26 @@
 <head>
   <meta charset="ISO-8859-1">
 
+  <!-- CSS -->
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.13/css/mdb.min.css" rel="stylesheet">
+  <!-- -->
+
+  <!-- Javascript -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.13/js/mdb.min.js"></script>
+  <!-- -->
+  
   <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
   <!--script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script-->
   <script src="./vendor/aframe-ar.js"></script>
@@ -53,13 +73,29 @@
   
   <div style="margin: 0em; left: 2em; top: 2em; position: fixed;">
 
-      <button id=gamePlayButton class=button onclick="startGame()"> PLAY </button>
-      <button id=gameStopButton class=button onclick="stopGame()" disabled> STOP </button>
-      <div>
+    <div class="container">
+      <div class="row">
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary active">
+                  <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
+              </label>
+              <label class="btn btn-secondary">
+                  <input type="radio" name="options" id="option2" autocomplete="off"> Radio
+              </label>
+              <label class="btn btn-secondary">
+                  <input type="radio" name="options" id="option3" autocomplete="off"> Radio
+              </label>
+          </div>
+      </div>
+      <div class="row">
+          <button id=gamePlayButton class="btn btn-secondary" style="margin-left: 0; width: 110" onclick="startGame()"> PLAY </button>
+          <button id=gameStopButton class="btn btn-secondary" style="margin-left: 0" onclick="stopGame()" disabled> STOP </button>
+      </div>
+      <div class="row">
           <span id="failsScore" style="color: red"></span>
           <span id="corretsScore" style="color: green"></span>
       </div>
-      
+    </div>
   </div>
 
 </body>
@@ -74,7 +110,7 @@
     let entityEl = document.createElement('a-marker');
     entityEl.setAttribute('type', 'pattern');
     entityEl.setAttribute('url', './patterns/patt/' + notes_marks[i] + '.patt');
-    entityEl.setAttribute('emitevents', 'true');
+    // entityEl.setAttribute('emitevents', 'true');
 
     let subEntityEl = document.createElement('a-entity');
     subEntityEl.setAttribute('position', '0 0.5 0');
@@ -94,10 +130,14 @@
     document.getElementById("gamePlayButton").disabled = true; 
     document.getElementById("gameStopButton").disabled = false; 
     var system = document.querySelector('a-scene').systems['sound_note'];
-    var note_name = notes_list[Math.floor(Math.random()*notes_list.length)]
-    current_note = 67;//notes[note_name]; 
-    system.play_sound(current_note);
+    cambiarNota(system);
+  }
+  function cambiarNota( system){
 
+var note_name = notes_list[Math.floor(Math.random()*notes_list.length)]
+    current_note = notes[note_name]; 
+    system.play_sound(current_note);
+    console.log(""+current_note);
     fails = 0;
     corrects = 0;
   }

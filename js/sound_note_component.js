@@ -142,8 +142,15 @@ AFRAME.registerComponent('sound_note', {
             if(current_note != -1){
               if(current_note == note_number){
                 corrects++;
+                setTimeout(function(){
+                  cambiarNota(system);
+                },2000);
                 console.log("Aciertos: ", corrects);
               }else{
+                setTimeout(function(){
+                  system.play_sound(current_note);
+                },2000);
+               
                 fails++;
                 console.log("Fallos: ",fails);
               }
