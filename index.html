@@ -77,13 +77,13 @@
       <div class="row">
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
               <label class="btn btn-secondary active">
-                  <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
+                  <input type="radio" name="options" id="option1" autocomplete="off" checked> Distancias
               </label>
               <label class="btn btn-secondary">
-                  <input type="radio" name="options" id="option2" autocomplete="off"> Radio
+                  <input type="radio" name="options" id="option2" autocomplete="off"> Perfect Pitch
               </label>
               <label class="btn btn-secondary">
-                  <input type="radio" name="options" id="option3" autocomplete="off"> Radio
+                  <input type="radio" name="options" id="option3" autocomplete="off"> Acordes
               </label>
           </div>
       </div>
@@ -91,9 +91,24 @@
           <button id=gamePlayButton class="btn btn-secondary" style="margin-left: 0; width: 110" onclick="startGame()"> PLAY </button>
           <button id=gameStopButton class="btn btn-secondary" style="margin-left: 0" onclick="stopGame()" disabled> STOP </button>
       </div>
-      <div class="row">
-          <span id="failsScore" style="color: red"></span>
-          <span id="corretsScore" style="color: green"></span>
+      <div class="row" style="background-color: #d9534f; width: 150; align-items: center!important">
+        <div class="col-md-8" style="font-size: 10; align-items: center!important">
+            <h6 style="color: white; text-transform: uppercase; align-items: center!important; margin-bottom: 0px">Fails</h6>         
+        </div>
+        <div class="col-md-1" style="color: white">
+            <span id="failsScore" ></span>
+        </div>
+      </div>
+  
+      <div class="row" style="margin-top: 5; background-color: #28a745; width: 150; align-items: center!important">
+          <div class="col-md-8" style="font-size: 10; align-items: center!important; width: 100"> 
+              <h6 style="color: white; text-transform: uppercase; align-items: center!important; margin-bottom: 0px">CORRECTS</h6>
+          </div>
+          <div class="col-md-1" style="color:white; width: 30">
+              <span id="corretsScore"  ></span>
+          </div>
+      </div>
+         
       </div>
     </div>
   </div>
