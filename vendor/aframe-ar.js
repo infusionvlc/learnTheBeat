@@ -369,7 +369,7 @@ var Qb=[Ik,Zh,_h,Qj,Qi,Pi,Ri,Ag,sg,qg,rg,yg,kh,jh,Oi,Mj];var Rb=[Jk,ki,ji,gi];va
 		The debug canvas is added to document.body.
 	*/
 	ARController.prototype.debugSetup = function() {
-		document.body.appendChild(this.canvas)
+		//document.body.appendChild(this.canvas)
 		this.setDebugMode(1);
 		this._bwpointer = this.getProcessingImage();
 	};
@@ -6669,18 +6669,17 @@ ARjs.SessionDebugUI = function(arSession, tangoPointCloud){
 	//////////////////////////////////////////////////////////////////////////////
 	//		add title
 	//////////////////////////////////////////////////////////////////////////////
-	// var domElement = document.createElement('div')
-	// domElement.style.display = 'block'
-	// domElement.style.fontWeight = 'bold'
-	// domElement.style.fontSize = '120%'
-	// this.domElement.appendChild(domElement)
-	// domElement.innerHTML = 'AR.js Session Debug'
+	var domElement = document.createElement('div')
+	domElement.style.display = 'block'
+	domElement.style.fontWeight = 'bold'
+	domElement.style.fontSize = '120%'
+	this.domElement.appendChild(domElement)
+	domElement.innerHTML = 'AR.js Session Debug'
 
 	//////////////////////////////////////////////////////////////////////////////
 	//		current-tracking-backend
 	//////////////////////////////////////////////////////////////////////////////
 
-	var domElement = document.createElement('span')
 	domElement.style.display = 'block'
 	this.domElement.appendChild(domElement)
 	domElement.innerHTML = '<b>trackingBackend</b> : ' +trackingBackend
@@ -6695,7 +6694,7 @@ ARjs.SessionDebugUI = function(arSession, tangoPointCloud){
 		domElement.style.display = 'block'
 		// domElement.setAttribute('target', '_blank')
 		domElement.href = ARjs.SessionDebugUI.AugmentedWebsiteURL + '?'+location.href
-		this.domElement.appendChild(domElement)						
+	this.domElement.appendChild(domElement)						
 	}
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -6758,12 +6757,12 @@ ARjs.AnchorDebugUI = function(arAnchor){
 	//		add title
 	//////////////////////////////////////////////////////////////////////////////
 
-	// var domElement = document.createElement('div')
-	// domElement.style.display = 'block'
-	// domElement.style.fontWeight = 'bold'
-	// domElement.style.fontSize = '120%'
-	// this.domElement.appendChild(domElement)
-	// domElement.innerHTML = 'Anchor Marker Debug'
+	var domElement = document.createElement('div')
+	domElement.style.display = 'block'
+	domElement.style.fontWeight = 'bold'
+	domElement.style.fontSize = '120%'
+	this.domElement.appendChild(domElement)
+	domElement.innerHTML = 'Anchor Marker Debug'
 
 	//////////////////////////////////////////////////////////////////////////////
 	//		current-tracking-backend
@@ -8320,11 +8319,11 @@ AFRAME.registerComponent('arjs-anchor', {
 					containerElement = document.createElement('div')
 					containerElement.id = 'arjsDebugUIContainer'
 					containerElement.setAttribute('style', 'position: fixed; bottom: 10px; width:100%; text-align: center; z-index: 1; color: grey;')
-					document.body.appendChild(containerElement)
+					//document.body.appendChild(containerElement)
 				}
 				// create anchorDebugUI
 				var anchorDebugUI = new ARjs.AnchorDebugUI(arAnchor)
-				containerElement.appendChild(anchorDebugUI.domElement)
+				//containerElement.appendChild(anchorDebugUI.domElement)
 			}
 		}, 1000/60)
 	},
@@ -8748,12 +8747,12 @@ AFRAME.registerSystem('arjs', {
 					containerElement = document.createElement('div')
 					containerElement.id = 'arjsDebugUIContainer'
 					containerElement.setAttribute('style', 'position: fixed; bottom: 10px; width:100%; text-align: center; z-index: 1;color: grey;')
-					document.body.appendChild(containerElement)
+					//document.body.appendChild(containerElement)
 				}
 
 				// create sessionDebugUI
 				var sessionDebugUI = new ARjs.SessionDebugUI(arSession)
-				containerElement.appendChild(sessionDebugUI.domElement)
+				//containerElement.appendChild(sessionDebugUI.domElement)
 			}
 		})
 
